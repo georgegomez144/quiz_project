@@ -20,9 +20,9 @@ class SliderClass {
     createButtons(buttonContainerClass, type) {
         const div = document.createElement('div');
         div.classList.add(`${buttonContainerClass}--container`);
-        div.innerHTML = `<button class="btn prev">Previous <span class="hide-in-mobile">${type}</span></button>
+        div.innerHTML = `<button class="btn prev">Previous ${type}</button>
             <div class="spacer with-buttons"></div>
-            <button class="btn next">Next <span class="hide-in-mobile">${type}</span></button>`;
+            <button class="btn next">Next ${type}</button>`;
         div.querySelector('.spacer.with-buttons').innerHTML = this.createLinks(type);
         div.firstChild.addEventListener('click', () => {
             this.updateCurrent(type, '-');
@@ -71,6 +71,7 @@ class SliderClass {
         });
         this.questions.forEach( v => {
             buttons = this.createButtons('question-btn', 'question');
+            v.innerHTML = `<div class="question-content">${v.innerHTML}</div>`;
             v.appendChild(buttons);
         });
     }
