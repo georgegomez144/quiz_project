@@ -20,9 +20,11 @@
         </div>
     </header>
     <main class="container-main" id="slider_questionaire">
-        <div class="container-info" id="info" data-step="1">
-            <div class="info">
+        <div class="container-info card" id="info" data-step="1">
+            <div class="header">
                 <h2>The Cosmos Awaits</h2>
+            </div>
+            <div class="content">
                 <p>
                     Not a sunrise but a galaxyrise Drake Equation permanence
                     of the stars gathered by gravity white dwarf sed quia
@@ -88,147 +90,152 @@
                 </p>
             </div>
         </div>
-        <div class="container-qas" data-step="2">
-            <h2>Questions</h2>
-            <div class="qas">
-                <!-- Short Answer Question -->
-                <div class="qa short-answer" data-question="1">
-                    <label for="short-answer-example" class="question">
-                        Laws of physics dream of the mind's eye a still more
-                        glorious dawn awaits?
-                    </label>
-                    <div class="answer text-input">
-                        <input type="text" name="short-answer-example" id="short-answer-example" />
-                    </div>
-                </div>
-                <!-- Long Answer Question -->
-                <div class="qa long-answer" data-question="2">
-                    <label for="long-answer-example" class="question">
-                        Laws of physics dream of the mind's eye a still more
-                        glorious dawn awaits?
-                    </label>
-                    <div class="answer text-input">
-                        <textarea name="long-answer-example" id="long-answer-example"></textarea>
-                    </div>
-                </div>
-                <!-- Fill in the Blank Question -->
-                <div class="qa fill-in-the-blank" data-question="3">
-                    <div class="question">
-                        <label for="fill-in-the-blank-example" class="screen-reader-only">
-                            Fill in the blank: Realm of the galaxies muse
-                            about made in the interiors of BLANK.
+        <div class="container-qas card" data-step="2">
+            <div class="header">
+                <h2>Questions</h2>
+            </div>
+            <div class="content">
+
+                <div class="qas">
+                    <!-- Short Answer Question -->
+                    <div class="qa short-answer" data-question="1">
+                        <label for="short-answer-example" class="question">
+                            Laws of physics dream of the mind's eye a still more
+                            glorious dawn awaits?
                         </label>
-                        <span aria-hidden role="presentation">
-                            Realm of the galaxies muse about made in the
-                            interiors of
-                        </span>
                         <div class="answer text-input">
-                            <input type="text" name="fill-in-the-blank-example" id="fill-in-the-blank-example" />
+                            <input type="text" name="short-answer-example" id="short-answer-example" />
                         </div>
-                        <span aria-hidden role="presentation">.</span>
                     </div>
-                </div>
-                <!-- Compound Fill in the Blank Question -->
-                <div class="qa fill-in-the-blank compound-fill-in-the-blank" data-question="4">
-                    <div class="question">
-                        <span>Consciousness</span>
+                    <!-- Long Answer Question -->
+                    <div class="qa long-answer" data-question="2">
+                        <label for="long-answer-example" class="question">
+                            Laws of physics dream of the mind's eye a still more
+                            glorious dawn awaits?
+                        </label>
                         <div class="answer text-input">
-                            <input type="text" />
+                            <textarea name="long-answer-example" id="long-answer-example"></textarea>
                         </div>
-                        <span>
-                            Hypatia worldlets Vangelis something incredible is waiting to be
-                        </span>
-                        <div class="answer text-input">
-                            <input type="text" />
+                    </div>
+                    <!-- Fill in the Blank Question -->
+                    <div class="qa fill-in-the-blank" data-question="3">
+                        <div class="question">
+                            <label for="fill-in-the-blank-example" class="screen-reader-only">
+                                Fill in the blank: Realm of the galaxies muse
+                                about made in the interiors of BLANK.
+                            </label>
+                            <span aria-hidden role="presentation">
+                                Realm of the galaxies muse about made in the
+                                interiors of
+                            </span>
+                            <div class="answer text-input">
+                                <input type="text" name="fill-in-the-blank-example" id="fill-in-the-blank-example" />
+                            </div>
+                            <span aria-hidden role="presentation">.</span>
                         </div>
-                        <span>.</span>
                     </div>
-                </div>
-                <!-- Multiple Choice Question -->
-                <div class="qa multiple-choice" data-question="5">
-                    <label for="multiple-example" class="question">
-                        At the edge of forever take root and flourish
-                        billions upon billions intelligent beings stirred by
-                        starlight the carbon in our apple pies. Tendrils of
-                        gossamer clouds Orion's sword a mote of dust
-                        suspended in a sunbeam?
-                    </label>
-                    <div class="answer select" data-question="6">
-                        <select name="multiple-example" id="multiple-example">
-                            <option selected disabled aria-hidden role="presentation">
-                                Select the best answer
-                            </option>
-                            <option value="1">Cosmic ocean</option>
-                            <option value="2">Drake equation</option>
-                            <option value="3">Star stuff</option>
-                        </select>
+                    <!-- Compound Fill in the Blank Question -->
+                    <div class="qa fill-in-the-blank compound-fill-in-the-blank" data-question="4">
+                        <div class="question">
+                            <span>Consciousness</span>
+                            <div class="answer text-input">
+                                <input type="text" />
+                            </div>
+                            <span>
+                                Hypatia worldlets Vangelis something incredible is waiting to be
+                            </span>
+                            <div class="answer text-input">
+                                <input type="text" />
+                            </div>
+                            <span>.</span>
+                        </div>
                     </div>
-                </div>
-                <!-- Inline Multiple Choice Question -->
-                <div class="qa multiple-choice inline-multiple-choice" data-question="7">
-                    <div class="question">
-                        <span>
-                            Hydrogen atoms paroxysm of global death as a
-                            patch of light citizens of distant epochs
-                        </span>
+                    <!-- Multiple Choice Question -->
+                    <div class="qa multiple-choice" data-question="5">
+                        <label for="multiple-example" class="question">
+                            At the edge of forever take root and flourish
+                            billions upon billions intelligent beings stirred by
+                            starlight the carbon in our apple pies. Tendrils of
+                            gossamer clouds Orion's sword a mote of dust
+                            suspended in a sunbeam?
+                        </label>
                         <div class="answer select">
-                            <select>
-                                <option selected disabled>
+                            <select name="multiple-example" id="multiple-example">
+                                <option selected disabled aria-hidden role="presentation">
                                     Select the best answer
                                 </option>
-                                <option value="1">mind's eye</option>
-                                <option value="2">circumnavigated</option>
-                                <option value="3">
-                                    astronomers courage
-                                </option>
+                                <option value="1">Cosmic ocean</option>
+                                <option value="2">Drake equation</option>
+                                <option value="3">Star stuff</option>
                             </select>
                         </div>
-                        <span>
-                            prime number are creatures of the cosmos.
-                        </span>
                     </div>
-                </div>
-                <!-- Compound Multiple Choice Question -->
-                <div class="qa multiple-choice inline-multiple-choice" data-question="8">
-                    <div class="question">
-                        <span>
-                            Citizens of distant epochs globular star cluster
-                            tesseract gathered by gravity
-                        </span>
-                        <div class="answer select">
-                            <select>
-                                <option selected disabled>
-                                    Select the best answer
-                                </option>
-                                <option value="1">heavy atoms</option>
-                                <option value="2">pretty stories</option>
-                                <option value="3">
-                                    vastness
-                                </option>
-                            </select>
+                    <!-- Inline Multiple Choice Question -->
+                    <div class="qa multiple-choice inline-multiple-choice" data-question="6">
+                        <div class="question">
+                            <span>
+                                Hydrogen atoms paroxysm of global death as a
+                                patch of light citizens of distant epochs
+                            </span>
+                            <div class="answer select">
+                                <select>
+                                    <option selected disabled>
+                                        Select the best answer
+                                    </option>
+                                    <option value="1">mind's eye</option>
+                                    <option value="2">circumnavigated</option>
+                                    <option value="3">
+                                        astronomers courage
+                                    </option>
+                                </select>
+                            </div>
+                            <span>
+                                prime number are creatures of the cosmos.
+                            </span>
                         </div>
-                        <span>
-                            prime number are creatures of the cosmos.
-                        </span>
-                        <span>
-                            Decipherment paroxysm of global death laws of
-                            physics emerged into consciousness hundreds of
-                        </span>
-                        <div class="answer select">
-                            <select>
-                                <option selected disabled>
-                                    Select the best answer
-                                </option>
-                                <option value="1">
-                                    thousands billions
-                                </option>
-                                <option value="2">
-                                    Sea of Tranquility
-                                </option>
-                                <option value="3">good evidence</option>
-                            </select>
+                    </div>
+                    <!-- Compound Multiple Choice Question -->
+                    <div class="qa multiple-choice inline-multiple-choice" data-question="7">
+                        <div class="question">
+                            <span>
+                                Citizens of distant epochs globular star cluster
+                                tesseract gathered by gravity
+                            </span>
+                            <div class="answer select">
+                                <select>
+                                    <option selected disabled>
+                                        Select the best answer
+                                    </option>
+                                    <option value="1">heavy atoms</option>
+                                    <option value="2">pretty stories</option>
+                                    <option value="3">
+                                        vastness
+                                    </option>
+                                </select>
+                            </div>
+                            <span>
+                                prime number are creatures of the cosmos.
+                            </span>
+                            <span>
+                                Decipherment paroxysm of global death laws of
+                                physics emerged into consciousness hundreds of
+                            </span>
+                            <div class="answer select">
+                                <select>
+                                    <option selected disabled>
+                                        Select the best answer
+                                    </option>
+                                    <option value="1">
+                                        thousands billions
+                                    </option>
+                                    <option value="2">
+                                        Sea of Tranquility
+                                    </option>
+                                    <option value="3">good evidence</option>
+                                </select>
+                            </div>
+                            <span>.</span>
                         </div>
-                        <span>.</span>
                     </div>
                 </div>
             </div>

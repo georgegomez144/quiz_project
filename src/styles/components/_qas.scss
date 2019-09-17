@@ -3,11 +3,11 @@
 }
 
 .qas {
-  margin-top: $verticalSpace;
+  // margin-top: $verticalSpace;
 
   .qa {
     + .qa {
-      margin-top: $verticalSpace * 2;
+      // margin-top: $verticalSpace * 2;
     }
   }
 }

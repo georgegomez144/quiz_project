@@ -8,4 +8,4 @@ import SliderClass from './SliderClass';
 // let example = new ExampleClass();
 // let message = example.getMessage();
 // console.log(message);
-let slider = new SliderClass("#slider_questionaire", {debug: true});
+let slider = new SliderClass("#slider_questionaire", {debug: false});
