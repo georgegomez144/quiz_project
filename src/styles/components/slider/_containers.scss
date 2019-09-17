@@ -28,26 +28,42 @@
         position: absolute;
         opacity: 0;
         visibility: hidden;
-        top: 60%;
+        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         transition: all 150ms ease-in-out;
         z-index: 0;
+            
+        &.previous {
+            left: 110%;
+            animation: slideOutRight 300ms forwards;
+        }
+        &.next {
+            left: -110%;
+            animation: slideOutLeft 300ms forwards;
+        }
         
         background-color: #ffffff;
         padding: 0;
         margin-bottom: 1rem;
         border-radius: 10px;
         box-shadow: 0 2px 8px -6px rgba(0,0,0,0.24), 0 7px 15px -8px rgba(0,0,0,0.34);
-        height: 80%;
+        height: 60%;
         width: calc(100% - 2rem);
         max-width: $containerMaxWidth;
+        overflow: hidden;
 
         &.active {
             opacity: 1;
             visibility: visible;
-            top: 50%;
+            left: 50%;
             z-index: 1;
+            &.previous {
+                animation: slideInRight 300ms forwards;
+            }
+            &.next {
+                animation: slideInLeft 300ms forwards;
+            }
         }
 
         [data-question] {
@@ -56,18 +72,50 @@
             visibility: hidden;
             height: calc(100% - 12rem);
             width: calc(100% - 2rem);
-            top: 60%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             transition: all 150ms ease-in-out;
             z-index: 0;
+            
+            &.previous {
+                left: 110%;
+                animation: slideOutRight 300ms forwards;
+            }
+            &.next {
+                left: -110%;
+                animation: slideOutLeft 300ms forwards;
+            }
 
             &.active {
                 opacity: 1;
                 visibility: visible;
-                top: 50%;
+                left: 50%;
                 z-index: 1;
+                &.previous {
+                    animation: slideInRight 300ms forwards;
+                }
+                &.next {
+                    animation: slideInLeft 300ms forwards;
+                }
             }
+        }
+
+        @keyframes slideInLeft {
+            0% { left: 110%; }
+            100% { left: 50%; }
+        }
+        @keyframes slideInRight {
+            0% { left: -110%; }
+            100% { left: 50%; }
+        }
+        @keyframes slideOutLeft {
+            0% { left: 50%; }
+            100% { left: -110%; }
+        }
+        @keyframes slideOutRight {
+            0% { left: 50%; }
+            100% { left: 110%; }
         }
     }
 }

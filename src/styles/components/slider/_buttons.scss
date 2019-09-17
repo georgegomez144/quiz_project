@@ -1,4 +1,11 @@
 .slider {
+    [data-step]:first-child .step-btn--container .btn.prev,
+    [data-step]:last-child .step-btn--container .btn.next,
+    [data-question]:first-child .question-btn--container .btn.prev,
+    [data-question]:last-child .question-btn--container .btn.next {
+        opacity: 0.4;
+        pointer-events: none;
+    }
 
     .step-btn--container,
     .question-btn--container {
@@ -8,6 +15,13 @@
         align-items: center;
         width: 100%;
         padding: 1rem;
+
+        .spacer.with-buttons {
+            .btn.active {
+                background-color: $baseSecondary;
+                color: $protonWhite;
+            }
+        }
 
         .btn {
             display: flex;
@@ -24,8 +38,18 @@
             cursor: pointer;
 
             &:hover {
-                background-color: darken($neutral20, 5%);
+                background-color: $baseSecondary;
+                color: $protonWhite;
 
+            }
+        }
+
+        .spacer {
+            flex: 1;
+            &.with-buttons {
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
         }
     }

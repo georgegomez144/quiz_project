@@ -14,52 +14,74 @@ class SliderClass {
             this.activateContainers();
         }
 
-        if (options.debug) console.log(this);
+        if (this.debug) console.log(this);
     }
 
     createButtons(buttonContainerClass, type) {
         const div = document.createElement('div');
         div.classList.add(`${buttonContainerClass}--container`);
-        div.innerHTML = `<button class="btn prev">Previous ${type}</button><div style="flex: 1"></div><button class="btn next">Next ${type}</button>`;
+        div.innerHTML = `<button class="btn prev">Previous ${type}</button><div class="spacer with-buttons"></div><button class="btn next">Next ${type}</button>`;
+        div.querySelector('.spacer.with-buttons').innerHTML = this.createLinks(type);
         div.firstChild.addEventListener('click', () => {
             this.updateCurrent(type, '-');
         });
         div.lastChild.addEventListener('click', () => {
             this.updateCurrent(type, '+');
         });
+        
+        div.querySelector('.spacer.with-buttons').querySelectorAll('.btn').forEach( btn => {
+            btn.addEventListener('click', () => {
+                let type = btn.dataset.type;
+                if(type === 'step') this.currentStep = btn.dataset.goToPage;
+                if(type === 'question') this.currentQuestion = btn.dataset.goToPage;
+                this.activateContainers();
+            });
+        });
+        
         return div;
     }
-    
-    removeUneededButtons(type, buttons, i) {
-        if (this.debug) console.log(buttons, this.steps.length, this.questions.length, i);
-        if (+i === 1) buttons.firstChild.remove();
-        if (type === 'step') if (+i === this.steps.length) buttons.lastChild.remove();
-        if (type === 'question') if (+i === this.questions.length) buttons.lastChild.remove();
-        return buttons;
+
+    createLinks(type) {
+        const div = document.createElement('div');
+        let strButtons = '';
+        if(type === 'step') {
+            for( let i = 0; i < this.steps.length; i++) {
+                let stepNumber = i + 1;
+                strButtons += `<button class="btn" data-go-to-page="${stepNumber}" data-type="step">${stepNumber}</button>`;
+            }
+        }
+        if(type === 'question') {
+            for( let i = 0; i < this.questions.length; i++) {
+                let stepNumber = i + 1;
+                strButtons += `<button class="btn" data-go-to-page="${stepNumber}" data-type="question">${stepNumber}</button>`;
+            }
+        }
+        div.innerHTML = strButtons;
+
+        return strButtons;
     }
 
     buildButtons() {
+        let buttons;
         this.steps.forEach( (v, i) => {
-            let buttons = this.createButtons('step-btn', 'step');
-            v.appendChild(this.removeUneededButtons('step', buttons, v.dataset.step));
+            buttons = this.createButtons('step-btn', 'step');
+            v.appendChild(buttons);
         });
-        this.questions.forEach( (v, i) => {
-            let buttons = this.createButtons('question-btn', 'question');
-            v.appendChild(this.removeUneededButtons('question', buttons, v.dataset.question));
+        this.questions.forEach( v => {
+            buttons = this.createButtons('question-btn', 'question');
+            v.appendChild(buttons);
         });
     }
 
-    updateCurrent(type, crement) {
-        if (this.debug) console.log('button click', type, crement);
+    updateCurrent(type, incrementType) {
         if (type === 'step') {
-            if (crement === '+') if (this.currentStep < this.steps.length) this.currentStep++;
-            if (crement === '-') if (this.currentStep > 1) this.currentStep--;
+            if (incrementType === '+') if (this.currentStep < this.steps.length) this.currentStep++;
+            if (incrementType === '-') if (this.currentStep > 1) this.currentStep--;
         }
         if (type === 'question') {
-            if (crement === '+') if (this.currentQuestion < this.questions.length) this.currentQuestion++;
-            if (crement === '-') if (this.currentQuestion > 1) this.currentQuestion--;
+            if (incrementType === '+') if (this.currentQuestion < this.questions.length) this.currentQuestion++;
+            if (incrementType === '-') if (this.currentQuestion > 1) this.currentQuestion--;
         }
-        if (this.debug) console.log(this.currentStep, this.currentQuestion);
         this.activateContainers();
     }
 
@@ -68,7 +90,15 @@ class SliderClass {
         this.questions.forEach( v => v.classList.remove('active'));
         this.steps.forEach( v => { if (+v.dataset.step === +this.currentStep) v.classList.add('active') });
         this.questions.forEach( v => { if (+v.dataset.question === +this.currentQuestion) v.classList.add('active') });
-        if (this.debug) console.log(this.steps, this.questions);
+        let paginationBtns = document.querySelectorAll('.spacer.with-buttons .btn');
+
+        paginationBtns.forEach( btn => {
+            let type = btn.dataset.type;
+            let paginationNumber = btn.dataset.goToPage;
+            btn.classList.remove('active');
+            if (type === 'step') { if (+paginationNumber === +this.currentStep) btn.classList.add('active'); }
+            if (type === 'question') { if (+paginationNumber === +this.currentQuestion) btn.classList.add('active'); }
+        });
     }
 }
 
