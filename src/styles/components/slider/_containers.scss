@@ -1,5 +1,6 @@
 .slider {
     position: relative;
+    overflow: hidden;
 
     .card {
         .header {
@@ -35,12 +36,10 @@
         z-index: 0;
             
         &.previous {
-            left: 110%;
-            animation: slideOutRight 300ms forwards;
+            animation: slideOutRight 500ms forwards;
         }
         &.next {
-            left: -110%;
-            animation: slideOutLeft 300ms forwards;
+            animation: slideOutLeft 500ms forwards;
         }
         
         background-color: #ffffff;
@@ -48,7 +47,7 @@
         margin-bottom: 1rem;
         border-radius: 10px;
         box-shadow: 0 2px 8px -6px rgba(0,0,0,0.24), 0 7px 15px -8px rgba(0,0,0,0.34);
-        height: 60%;
+        height: 90%;
         width: calc(100% - 2rem);
         max-width: $containerMaxWidth;
         overflow: hidden;
@@ -56,13 +55,12 @@
         &.active {
             opacity: 1;
             visibility: visible;
-            left: 50%;
             z-index: 1;
             &.previous {
-                animation: slideInRight 300ms forwards;
+                animation: slideInRight 500ms forwards;
             }
             &.next {
-                animation: slideInLeft 300ms forwards;
+                animation: slideInLeft 500ms forwards;
             }
         }
 
@@ -79,43 +77,40 @@
             z-index: 0;
             
             &.previous {
-                left: 110%;
-                animation: slideOutRight 300ms forwards;
+                animation: slideOutRight 500ms forwards;
             }
             &.next {
-                left: -110%;
-                animation: slideOutLeft 300ms forwards;
+                animation: slideOutLeft 500ms forwards;
             }
 
             &.active {
                 opacity: 1;
                 visibility: visible;
-                left: 50%;
                 z-index: 1;
                 &.previous {
-                    animation: slideInRight 300ms forwards;
+                    animation: slideInRight 500ms forwards;
                 }
                 &.next {
-                    animation: slideInLeft 300ms forwards;
+                    animation: slideInLeft 500ms forwards;
                 }
             }
         }
 
         @keyframes slideInLeft {
-            0% { left: 110%; }
+            0% { left: -110%; }
             100% { left: 50%; }
         }
         @keyframes slideInRight {
-            0% { left: -110%; }
+            0% { left: 200%; }
             100% { left: 50%; }
         }
         @keyframes slideOutLeft {
             0% { left: 50%; }
-            100% { left: -110%; }
+            100% { left: 110%; }
         }
         @keyframes slideOutRight {
             0% { left: 50%; }
-            100% { left: 110%; }
+            100% { left: -200%; }
         }
     }
 }

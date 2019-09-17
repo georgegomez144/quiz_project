@@ -20,7 +20,9 @@ class SliderClass {
     createButtons(buttonContainerClass, type) {
         const div = document.createElement('div');
         div.classList.add(`${buttonContainerClass}--container`);
-        div.innerHTML = `<button class="btn prev">Previous ${type}</button><div class="spacer with-buttons"></div><button class="btn next">Next ${type}</button>`;
+        div.innerHTML = `<button class="btn prev">Previous <span class="hide-in-mobile">${type}</span></button>
+            <div class="spacer with-buttons"></div>
+            <button class="btn next">Next <span class="hide-in-mobile">${type}</span></button>`;
         div.querySelector('.spacer.with-buttons').innerHTML = this.createLinks(type);
         div.firstChild.addEventListener('click', () => {
             this.updateCurrent(type, '-');
@@ -86,18 +88,27 @@ class SliderClass {
     }
 
     activateContainers() {
-        this.steps.forEach( v => v.classList.remove('active'));
-        this.questions.forEach( v => v.classList.remove('active'));
-        this.steps.forEach( v => { if (+v.dataset.step === +this.currentStep) v.classList.add('active') });
-        this.questions.forEach( v => { if (+v.dataset.question === +this.currentQuestion) v.classList.add('active') });
-        let paginationBtns = document.querySelectorAll('.spacer.with-buttons .btn');
+        const cns = ['active','previous','next'];
+        this.steps.forEach( step => { cns.forEach( cn => step.classList.remove(cn) ); });
+        this.questions.forEach( question => { cns.forEach( cn => question.classList.remove(cn) ); });
+        this.steps.forEach( step => {
+            if (+step.dataset.step === +this.currentStep) step.classList.add(cns[0]);
+            if (+this.currentStep !== 0 && +step.dataset.step < +this.currentStep) step.classList.add(cns[1]);
+            if (this.steps.length -1 !== +this.currentStep && +step.dataset.step > +this.currentStep) step.classList.add(cns[2]);
+        });
+        this.questions.forEach( question => {
+            if (+question.dataset.question === +this.currentQuestion) question.classList.add(cns[0]);
+            if (+this.currentQuestion !== 0 && +question.dataset.question < +this.currentQuestion) question.classList.add(cns[1]);
+            if (this.questions.length -1 !== +this.currentQuestion && +question.dataset.question > +this.currentQuestion) question.classList.add(cns[2]);
+        });
 
+        let paginationBtns = document.querySelectorAll('.spacer.with-buttons .btn');
         paginationBtns.forEach( btn => {
             let type = btn.dataset.type;
             let paginationNumber = btn.dataset.goToPage;
-            btn.classList.remove('active');
-            if (type === 'step') { if (+paginationNumber === +this.currentStep) btn.classList.add('active'); }
-            if (type === 'question') { if (+paginationNumber === +this.currentQuestion) btn.classList.add('active'); }
+            btn.classList.remove(cns[0]);
+            if (type === 'step') { if (+paginationNumber === +this.currentStep) btn.classList.add(cns[0]); }
+            if (type === 'question') { if (+paginationNumber === +this.currentQuestion) btn.classList.add(cns[0]); }
         });
     }
 }
