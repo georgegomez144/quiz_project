@@ -10,6 +10,13 @@
       // margin-top: $verticalSpace * 2;
     }
   }
+
+  input, textarea {
+    padding: 0.2rem 0.5rem;
+    border: 0;
+    border-bottom: 1px solid darkgrey;
+    background-color: #f7f7f7;
+  }
 }
 
 .question, label.question {  
@@ -59,7 +66,12 @@
 .long-answer {
   textarea {
     display: block;
-    width: 100%;
+    width: 30vw;
+    min-height: 35px;
+    max-height: 15rem;
+    @include respond($break50) {
+      width: calc(100vw - 4rem);
+    }
     resize: vertical;
     overflow: auto;
   }

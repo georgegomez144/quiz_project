@@ -108,8 +108,8 @@ class SliderClass {
             let type = btn.dataset.type;
             let paginationNumber = btn.dataset.goToPage;
             btn.classList.remove(cns[0]);
-            if (type === 'step') { if (+paginationNumber === +this.currentStep) btn.classList.add(cns[0]); }
-            if (type === 'question') { if (+paginationNumber === +this.currentQuestion) btn.classList.add(cns[0]); }
+            if (type === 'step') if (+paginationNumber === +this.currentStep) btn.classList.add(cns[0]);
+            if (type === 'question') if (+paginationNumber === +this.currentQuestion) btn.classList.add(cns[0]);
         });
     }
 }
