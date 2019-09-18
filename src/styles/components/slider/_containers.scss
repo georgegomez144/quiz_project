@@ -103,6 +103,9 @@
                 display: flex;
                 flex-flow: column nowrap;
                 justify-content: center;
+                @include respond($break50, max) {
+                  justify-content: flex-start;
+                }
                 align-items: center;
                 flex: 1;
                 order: 2;
