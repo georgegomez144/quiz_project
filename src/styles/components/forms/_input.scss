@@ -1,8 +1,9 @@
-div.input-container {
+div.input-container, div.textarea-container, div.select-container {
     position: relative;
     background-color: $neutral20;
+    margin-bottom: 0.5rem;
 
-    input {
+    input, textarea, select {
         border: 0;
         background-color: transparent;
         &:focus {
@@ -29,8 +30,11 @@ div.input-container {
         width: 100%;
     }
 
-    &.error::after {
-        width: 100%;
-        background-color: $boldRed;
+    &.error {
+        background-color: lighten($boldRed, 50%);
+        &::after {
+            width: 100%;
+            background-color: $boldRed;
+        }
     }
 }

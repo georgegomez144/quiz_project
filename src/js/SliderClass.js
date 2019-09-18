@@ -1,4 +1,5 @@
 import _Class from "./_Class";
+import { runInThisContext } from "vm";
 const _ = new _Class();
 
 class SliderClass {
@@ -22,7 +23,7 @@ class SliderClass {
 
     createButtons(buttonContainerClass, type) {
         const div = document.createElement('div');
-        div.classList.add(`${buttonContainerClass}--container`);
+        div.addClass(`${buttonContainerClass}--container`);
         div.innerHTML = `<button class="btn prev">Previous ${type}</button>
             <div class="spacer with-buttons"></div>
             <button class="btn next">Next ${type}</button>`;
@@ -34,7 +35,7 @@ class SliderClass {
             this.updateCurrent(type, '+');
         });
         
-        div.find('.spacer.with-buttons').find('.btn').forEach( btn => {
+        div.find('.spacer.with-buttons').find('.btn', true).forEach( btn => {
             btn.addEventListener('click', () => {
                 let type = btn.dataset.type;
                 if(type === 'step') this.currentStep = btn.dataset.goToPage;
@@ -80,7 +81,6 @@ class SliderClass {
     }
 
     updateCurrent(type, incrementType) {
-        this.checkQuestionAnswered(this.currentQuestion);
         if (type === 'step') {
             if (incrementType === '+') if (this.currentStep < this.steps.length) this.currentStep++;
             if (incrementType === '-') if (this.currentStep > 1) this.currentStep--;
@@ -94,33 +94,48 @@ class SliderClass {
 
     activateContainers() {
         const cns = ['active','previous','next'];
-        this.steps.forEach( step => { cns.forEach( cn => step.classList.remove(cn) ); });
-        this.questions.forEach( question => { cns.forEach( cn => question.classList.remove(cn) ); });
+        this.steps.forEach( step => { cns.forEach( cn => step.removeClass(cn) ); });
+        this.questions.forEach( question => { cns.forEach( cn => question.removeClass(cn) ); });
         this.steps.forEach( step => {
-            if (+step.dataset.step === +this.currentStep) step.classList.add(cns[0]);
-            if (+this.currentStep !== 0 && +step.dataset.step < +this.currentStep) step.classList.add(cns[1]);
-            if (this.steps.length -1 !== +this.currentStep && +step.dataset.step > +this.currentStep) step.classList.add(cns[2]);
+            if (+step.dataset.step === +this.currentStep) step.addClass(cns[0]);
+            if (+this.currentStep !== 0 && +step.dataset.step < +this.currentStep) step.addClass(cns[1]);
+            if (this.steps.length -1 !== +this.currentStep && +step.dataset.step > +this.currentStep) step.addClass(cns[2]);
         });
         this.questions.forEach( question => {
-            if (+question.dataset.question === +this.currentQuestion) question.classList.add(cns[0]);
-            if (+this.currentQuestion !== 0 && +question.dataset.question < +this.currentQuestion) question.classList.add(cns[1]);
-            if (this.questions.length -1 !== +this.currentQuestion && +question.dataset.question > +this.currentQuestion) question.classList.add(cns[2]);
+            if (+question.dataset.question === +this.currentQuestion) question.addClass(cns[0]);
+            if (+this.currentQuestion !== 0 && +question.dataset.question < +this.currentQuestion) question.addClass(cns[1]);
+            if (this.questions.length -1 !== +this.currentQuestion && +question.dataset.question > +this.currentQuestion) question.addClass(cns[2]);
         });
 
         let paginationBtns = _.all('.spacer.with-buttons .btn');
         paginationBtns.forEach( btn => {
             let type = btn.dataset.type;
             let paginationNumber = btn.dataset.goToPage;
-            btn.classList.remove(cns[0]);
-            if (type === 'step') if (+paginationNumber === +this.currentStep) btn.classList.add(cns[0]);
-            if (type === 'question') if (+paginationNumber === +this.currentQuestion) btn.classList.add(cns[0]);
+            btn.removeClass(cns[0]);
+            if (type === 'step') if (+paginationNumber === +this.currentStep) btn.addClass(cns[0]);
+            if (type === 'question') if (+paginationNumber === +this.currentQuestion) btn.addClass(cns[0]);
+            let curQuesAdjusted = +this.currentQuestion - 1;
         });
+        this.checkQuestionAnswered();
     }
 
-    checkQuestionAnswered(questionNumber) {
-        const answerContainer = _.only(`[data-question="${questionNumber}"]`);
-        let answers = answerContainer.find('input, textarea, select');
-        console.log({answerContainer, answers});
+    checkQuestionAnswered() {
+        _.all(`.question-btn--container .spacer.with-buttons .btn`)
+            .forEach( pb => pb.removeClass('error'));
+        let answeredQuestions = [];
+        for (let i = 1; i < +this.currentQuestion; i++) answeredQuestions.push(i);
+        answeredQuestions.forEach( questionNumber => {
+            const answerContainer = _.only(`[data-question="${questionNumber}"]`);
+            let emptyAnswers = answerContainer.find('.empty', true);
+            if(emptyAnswers.length > 0) {
+                let paginationBtns = _.all(`.question-btn--container .spacer.with-buttons .btn[data-go-to-page="${questionNumber}"]`);
+                paginationBtns.forEach( pb => {
+                    console.log(pb.data('goToPage'), questionNumber);
+                    if(+pb.data('goToPage') === +questionNumber) pb.addClass('error');
+                    else pb.removeClass('error');
+                });
+            }
+        });
     }
 }
 

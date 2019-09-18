@@ -10,14 +10,19 @@ class InputAnimationsClass {
         this.wrapElements(arrInputs)
             .addFocusListenerToElements(arrInputs)
             .addBlurListenerToElements(arrInputs);
-        this.wrapElements(arrTextareas);
-        this.wrapElements(arrSelects);
+        this.wrapElements(arrTextareas)
+        .addFocusListenerToElements(arrTextareas)
+        .addBlurListenerToElements(arrTextareas);
+        this.wrapElements(arrSelects)
+        .addFocusListenerToElements(arrSelects)
+        .addBlurListenerToElements(arrSelects);
     }
 
     wrapElements(elements) {
         elements.forEach( element => {
             let wrapper = _.create('div');
             wrapper.addClass(`${element.nodeName.toLowerCase()}-container`);
+            if (element.value.trim() === '' || element.value === 'Select the best answer') wrapper.addClass('empty');
             element.parentNode.insertBefore(wrapper, element);
             wrapper.appendChild(element);
         });
@@ -30,7 +35,7 @@ class InputAnimationsClass {
                 let parent = element.parentNode;
                 let elementName = element.nodeName.toLowerCase();
                 let containerName = `${elementName}-container`;
-                if (parent.hasClass(containerName)) parent.addClass('active');
+                if (parent.hasClass(containerName)) parent.addClass('active').removeClass('empty');
             });
         });
         return this;
@@ -43,7 +48,7 @@ class InputAnimationsClass {
                 let elementName = element.nodeName.toLowerCase();
                 let containerName = `${elementName}-container`;
                 if (parent.hasClass(containerName)) parent.removeClass('active');
-                if (element.value.trim().length < 1) parent.addClass('error'); else parent.removeClass('error');
+                if (element.value.trim().length < 1 || element.value === 'Select the best answer') parent.addClass('error empty'); else parent.removeClass('error empty');
             });
         });
         return this;

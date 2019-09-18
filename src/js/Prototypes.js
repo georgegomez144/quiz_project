@@ -3,6 +3,7 @@ Element.prototype.addClass = function (classNames) {
     cns.forEach( cn => {
         this.classList.add(cn);
     });
+    return this;
 }
 
 Element.prototype.removeClass = function(classNames) {
@@ -10,6 +11,7 @@ Element.prototype.removeClass = function(classNames) {
     cns.forEach( cn => {
         this.classList.remove(cn);
     });
+    return this;
 }
 
 Element.prototype.hasClass = function(classNames) {
@@ -19,6 +21,11 @@ Element.prototype.hasClass = function(classNames) {
         if (this.classList.contains(cn)) counter++;
     });
     return counter === cns.length;
+}
+
+Element.prototype.data = function(name, value) {
+    if(!value) return this.dataset[name];
+    this.dataset[name] = value;
 }
 
 Element.prototype.on = function(event, func, options) {
@@ -35,7 +42,8 @@ Element.prototype.off = function(event, func, options) {
     });
 }
 
-Element.prototype.find = function(queries) {
+Element.prototype.find = function(queries, returnArray) {
+    returnArray = (returnArray !== null) ? returnArray : false;
     let qs = queries.split(/\,/g);
     let foundElements = [];
     qs.forEach( query => {
@@ -48,6 +56,6 @@ Element.prototype.find = function(queries) {
             }
         }
     });
-    if (foundElements.length === 1) return foundElements[0];
+    if (!returnArray) if (foundElements.length === 1) return foundElements[0];
     return foundElements;
 }
