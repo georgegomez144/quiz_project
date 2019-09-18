@@ -6,7 +6,7 @@ class SliderClass {
 
     constructor(selector, options) {
         this.debug = options.debug ? options.debug : false;
-        this.currentStep = 2;
+        this.currentStep = 1;
         this.currentQuestion = 1;
         this.sliderContainer = _.only(selector);
         if(!!this.sliderContainer) {
