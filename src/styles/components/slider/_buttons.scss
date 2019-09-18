@@ -8,11 +8,19 @@
     }
 
     .step-btn--container { flex-flow: row nowrap; }
-    .question-btn--container { flex-flow: row wrap; }
+    .question-btn--container {
+        flex-flow: row wrap;
+        .spacer.with-buttons .btn {
+            margin: 2px 6px !important;
+        }
+    }
     .step-btn--container,
     .question-btn--container {
         display: flex;
         justify-content: space-between;
+        @include respond($break50, max) {
+            justify-content: center;
+        }
         align-items: center;
         width: 100%;
         padding: 1rem;
@@ -49,13 +57,17 @@
         .spacer {
             flex: 1;
             &.with-buttons {
-                @media all and (max-width: $break50) {
-                    display: none;
-                }
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                margin: 0.7rem 0;
                 .btn {
+                    @include respond($break50, max) {
+                        // display: none;
+                        font-size: 0.6rem;
+                        border-radius: 50%;
+                        padding: 9px 13px;
+                    }
                     margin: 0 0.2rem;
                     &.active {
                         background-color: $baseSecondary;
