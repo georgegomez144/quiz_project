@@ -1,0 +1,36 @@
+div.input-container {
+    position: relative;
+    background-color: $neutral20;
+
+    input {
+        border: 0;
+        background-color: transparent;
+        &:focus {
+            outline: 0;
+        }
+    }
+
+    &::before, &::after {
+        position: absolute;
+        bottom: -2px;
+        content: '';
+        display: block;
+        height: 2px;
+        width: 100%;
+        background-color: $neutral30;
+    }
+    &::after {
+        width: 0;
+        background-color: $mediumBlue;
+        transition: width 300ms ease-in-out;
+    }
+
+    &.active::after {
+        width: 100%;
+    }
+
+    &.error::after {
+        width: 100%;
+        background-color: $boldRed;
+    }
+}

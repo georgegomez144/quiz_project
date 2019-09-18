@@ -1,6 +1,7 @@
 // Webpack entrypoint
 
 import '../styles/styles.scss';
+import './Prototypes';
 import ExampleClass from './ExampleClass';
 import SliderClass from './SliderClass';
 import InputAnimationsClass from './InputAnimationsClass';
