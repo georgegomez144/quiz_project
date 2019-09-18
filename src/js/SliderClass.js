@@ -1,14 +1,17 @@
+import _Class from "./_Class";
+const _ = new _Class();
+
 class SliderClass {
 
     constructor(selector, options) {
         this.debug = options.debug ? options.debug : false;
-        this.currentStep = 1;
+        this.currentStep = 2;
         this.currentQuestion = 1;
-        this.sliderContainer = document.querySelector(selector);
+        this.sliderContainer = _.only(selector);
         if(!!this.sliderContainer) {
-            this.sliderContainer.classList.add('slider');
-            this.steps = this.sliderContainer.querySelectorAll('[data-step]');
-            this.questions = this.sliderContainer.querySelectorAll('[data-question]');
+            this.sliderContainer.addClass('slider');
+            this.steps = this.sliderContainer.find('[data-step]');
+            this.questions = this.sliderContainer.find('[data-question]');
 
             this.buildButtons();
             this.activateContainers();
@@ -23,7 +26,7 @@ class SliderClass {
         div.innerHTML = `<button class="btn prev">Previous ${type}</button>
             <div class="spacer with-buttons"></div>
             <button class="btn next">Next ${type}</button>`;
-        div.querySelector('.spacer.with-buttons').innerHTML = this.createLinks(type);
+        div.find('.spacer.with-buttons').innerHTML = this.createLinks(type);
         div.firstChild.addEventListener('click', () => {
             this.updateCurrent(type, '-');
         });
@@ -31,7 +34,7 @@ class SliderClass {
             this.updateCurrent(type, '+');
         });
         
-        div.querySelector('.spacer.with-buttons').querySelectorAll('.btn').forEach( btn => {
+        div.find('.spacer.with-buttons').find('.btn').forEach( btn => {
             btn.addEventListener('click', () => {
                 let type = btn.dataset.type;
                 if(type === 'step') this.currentStep = btn.dataset.goToPage;
@@ -77,6 +80,7 @@ class SliderClass {
     }
 
     updateCurrent(type, incrementType) {
+        this.checkQuestionAnswered(this.currentQuestion);
         if (type === 'step') {
             if (incrementType === '+') if (this.currentStep < this.steps.length) this.currentStep++;
             if (incrementType === '-') if (this.currentStep > 1) this.currentStep--;
@@ -103,7 +107,7 @@ class SliderClass {
             if (this.questions.length -1 !== +this.currentQuestion && +question.dataset.question > +this.currentQuestion) question.classList.add(cns[2]);
         });
 
-        let paginationBtns = document.querySelectorAll('.spacer.with-buttons .btn');
+        let paginationBtns = _.all('.spacer.with-buttons .btn');
         paginationBtns.forEach( btn => {
             let type = btn.dataset.type;
             let paginationNumber = btn.dataset.goToPage;
@@ -111,6 +115,12 @@ class SliderClass {
             if (type === 'step') if (+paginationNumber === +this.currentStep) btn.classList.add(cns[0]);
             if (type === 'question') if (+paginationNumber === +this.currentQuestion) btn.classList.add(cns[0]);
         });
+    }
+
+    checkQuestionAnswered(questionNumber) {
+        const answerContainer = _.only(`[data-question="${questionNumber}"]`);
+        let answers = answerContainer.find('input, textarea, select');
+        console.log({answerContainer, answers});
     }
 }
 
