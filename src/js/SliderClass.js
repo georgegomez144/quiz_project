@@ -130,7 +130,7 @@ class SliderClass {
             if(emptyAnswers.length > 0) {
                 let paginationBtns = _.all(`.question-btn--container .spacer.with-buttons .btn[data-go-to-page="${questionNumber}"]`);
                 paginationBtns.forEach( pb => {
-                    console.log(pb.data('goToPage'), questionNumber);
+                    // console.log(pb.data('goToPage'), questionNumber);
                     if(+pb.data('goToPage') === +questionNumber) pb.addClass('error');
                     else pb.removeClass('error');
                 });
